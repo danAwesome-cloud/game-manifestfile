@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: tictactoe
+  name: tictactoe
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tictactoe
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: tictactoe
+    spec:
+      containers:
+      - image: danawesomedoc/gameapp:1
+        name: tictactoe
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lb-service
+  labels:
+    app: lb-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 5000
+  selector:
+    app: tictactoe
