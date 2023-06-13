@@ -36,6 +36,7 @@ spec:
           volumeMounts:
             - name: db-volume
               mountPath: /data/db
+          resources: {}
       volumes:
         - name: db-volume
           hostPath:
