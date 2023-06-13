@@ -20,7 +20,7 @@ spec:
       containers:
         - image: danawesomedoc/gameapp:16
           name: flaskdemo
-          resources: {}
+         
         - image: mongo
           name: db
           environment:
@@ -32,6 +32,7 @@ spec:
           volumeMounts:
             - name: db-volume
               mountPath: /data/db
+               resources: {}
     volumes:
       - name: db-volume
         hostPath:
