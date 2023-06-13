@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   labels:
     app: flaskdemo
   name: flaskdemo
@@ -10,34 +9,37 @@ spec:
   selector:
     matchLabels:
       app: flaskdemo
-  strategy: {}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: flaskdemo
     spec:
       containers:
         - image: danawesomedoc/gameapp:16
           name: flaskdemo
-         
         - image: mongo
           name: db
           environment:
-            - MONGO_INITDB_ROOT_USERNAME=admin
-            - MONGO_INITDB_ROOT_PASSWORD=password
-            - MONGO_INITDB_DATABASE=Tictac.player
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: admin
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: password
+            - name: MONGO_INITDB_DATABASE
+              value: Tictac.player
           ports:
             - containerPort: 27017
           volumeMounts:
             - name: db-volume
               mountPath: /data/db
-               resources: {}
-    volumes:
-      - name: db-volume
-        hostPath:
-          path: - ./data:/data/db
-
+      volumes:
+        - name: db-volume
+          hostPath:
+            path: /data/db
 status: {}
 ---
 apiVersion: v1
@@ -49,7 +51,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 80
-    targetPort: 5000
+    - port: 80
+      targetPort: 5000
   selector:
     app: flaskdemo
