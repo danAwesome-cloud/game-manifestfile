@@ -18,7 +18,7 @@ spec:
         app: tictactoe
     spec:
       containers:
-      - image: danawesomedoc/gameapp:5
+      - image: danawesomedoc/gameapp:15
         name: tictactoe
         resources: {}
 status: {}
