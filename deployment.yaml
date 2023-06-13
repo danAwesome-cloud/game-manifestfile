@@ -22,7 +22,7 @@ spec:
       containers:
         - image: danawesomedoc/gameapp:16
           name: flaskdemo
-        - image: mongo
+        - image: danawesomenew/mongo:latest
           name: db
           environment:
             - name: MONGO_INITDB_ROOT_USERNAME
