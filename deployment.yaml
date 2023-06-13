@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: your-image-name:tag
+          image: danawesomedoc/gameapp:16
           ports:
             - containerPort: 5000
           volumeMounts:
@@ -37,10 +37,10 @@ spec:
     volumes:
       - name: app-volume
         hostPath:
-          path: /path/to/your/app
+          path: /app
       - name: db-volume
         hostPath:
-          path: /path/to/your/data
+          path: /db
 ---
 apiVersion: v1
 kind: Service
