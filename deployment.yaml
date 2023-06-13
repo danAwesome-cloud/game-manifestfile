@@ -18,19 +18,25 @@ spec:
         app: flaskdemo
     spec:
       containers:
-      - image: danawesomedoc/gameapp:16
-        name: flaskdemo
-        resources: {}
-      - image: mongo
-        name: db
-        environment:
-          - MONGO_INITDB_ROOT_USERNAME=admin
-          - MONGO_INITDB_ROOT_PASSWORD=password
-          - MONGO_INITDB_DATABASE=Tictac.player
-        ports:
-          - "27017:27017"
-        volumes:
-          - ./data:/data/db
+        - image: danawesomedoc/gameapp:16
+          name: flaskdemo
+          resources: {}
+        - image: mongo
+          name: db
+          environment:
+            - MONGO_INITDB_ROOT_USERNAME=admin
+            - MONGO_INITDB_ROOT_PASSWORD=password
+            - MONGO_INITDB_DATABASE=Tictac.player
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: db-volume
+              mountPath: /data/db
+    volumes:
+      - name: db-volume
+        hostPath:
+          path: - ./data:/data/db
+
 status: {}
 ---
 apiVersion: v1
