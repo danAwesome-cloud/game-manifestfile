@@ -20,7 +20,7 @@ spec:
         app: flaskdemo
     spec:
       containers:
-        - image: danawesomedoc/gameapp:16
+        - image: danawesomedoc/gameapp:17
           name: flaskdemo
         - image: mongo:latest
           name: db
